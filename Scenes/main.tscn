@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://bokatws48gqjx"]
+
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_aroyf"]
+[ext_resource type="Texture2D" uid="uid://6cffmi6u3lvo" path="res://Assets/bg.png" id="1_bxora"]
+[ext_resource type="PackedScene" uid="uid://3s6y6mgxwp8n" path="res://Scenes/pipe.tscn" id="2_1muev"]
+[ext_resource type="PackedScene" uid="uid://b33llkt1mvab0" path="res://Scenes/bird.tscn" id="3_ab3hi"]
+[ext_resource type="PackedScene" uid="uid://cyrbxksk5mxr5" path="res://Scenes/ground.tscn" id="4_c0jyf"]
+[ext_resource type="PackedScene" uid="uid://cqlt5w7wvqeqs" path="res://Scenes/game_over.tscn" id="6_tvp31"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_aroyf")
+pipe_scene = ExtResource("2_1muev")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_bxora")
+offset = Vector2(432, 384)
+
+[node name="Bird" parent="." instance=ExtResource("3_ab3hi")]
+
+[node name="Ground" parent="." instance=ExtResource("4_c0jyf")]
+z_index = 1
+position = Vector2(0, 733)
+
+[node name="PipeTimer" type="Timer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -107.5
+offset_top = 35.0
+offset_right = 107.5
+offset_bottom = 98.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Score : 0"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="GameOver" parent="." instance=ExtResource("6_tvp31")]
+
+[node name="Highscore" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.0
+offset_right = 107.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "High Score : 0"
+uppercase = true
+
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
