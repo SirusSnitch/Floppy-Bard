@@ -16,4 +16,4 @@
 
 ## License
 
-This project is licensed under the MIT License. Feel free to use, modify, or share the game. See the [LICENSE](License.txt) file for details.
+This project is licensed under the MIT License. Feel free to use, modify, or share the game. See the [LICENSE](./License.txt) file for details.
